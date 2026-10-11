@@ -1,4 +1,5 @@
 import { useReducer, useState } from "react";
+import { studentContext } from "../StudentProvider";
 
 
 const initialStudents =[
@@ -24,6 +25,9 @@ const initialStudents =[
             student.id === action.payload.id ? {...student,status:student.status ==="Active" ? "Inactive" : "Active" } :student
           ))
         }
+        case "ADD_STUDENT":{
+          return [...state,{id:action.payload.id,name:action.payload.name,score:action.payload.score,status:action.payload.status}]
+        }
         default:
           return state;
         }
@@ -36,6 +40,15 @@ const StudentProgressTracker = () => {
 const [state, dispatch] = useReducer(reducer, initialStudents);
 
 const [newScore,setNewScore]=useState(null)
+
+const[newName,setNewName]=useState('')
+const[newStudnetScore,setNewStudentScore]=useState(null)
+
+const handleInput=(e)=>{
+    e.preventDefault()
+
+    dispatch({type:"ADD_STUDENT",payload:{id:Math.random() *10,name:newName,score:Number(newStudnetScore),status:"Active"}})
+}
 
   return (
     <div>
@@ -52,6 +65,13 @@ const [newScore,setNewScore]=useState(null)
          </div>
 
      ))}
+     <br></br>
+     <form onSubmit={handleInput}>
+      <h1>Add new Student Details</h1>
+     <label>Enter Name</label> <input type="text" onChange={(e)=>{setNewName(e.target.value)}} required ></input>
+     <label>Enter score</label> <input type="number" onChange={(e)=>{setNewStudentScore(e.target.value)}} required ></input>
+     <button type="submit">Add</button>
+     </form>
       
     </div>
   )

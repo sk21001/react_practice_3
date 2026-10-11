@@ -13,10 +13,7 @@ const App = () => {
         <StudentList/>
         <StudentSummary/>
      </StudentContextProvider>
-
-      
-  
-    </>
+   </>
   )
 }
 
