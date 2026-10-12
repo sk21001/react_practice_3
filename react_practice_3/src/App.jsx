@@ -1,5 +1,8 @@
 
-import DebugKey from "./components/DebugKey"
+import StudentList from "./Task5/StudentList"
+import StudentSummary from "./Task5/StudentSummary"
+import { StudentContextProvider } from "./StudentProvider"
+import ScoreControl from "./Task5/ScoreControl"
 
 
 
@@ -7,7 +10,11 @@ import DebugKey from "./components/DebugKey"
 const App = () => {
   return (
     <>
-     <DebugKey/>
+     <StudentContextProvider>
+        <StudentList/>
+        <StudentSummary/>
+        <ScoreControl/>
+     </StudentContextProvider>
    </>
   )
 }
